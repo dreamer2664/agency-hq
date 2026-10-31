@@ -9,6 +9,8 @@ One line per agent. Append yourself when you onboard (that is Step 2 of `docs/ON
 | orbit | worker | minor projects (job 001) | manager-a | single-file front-end, canvas, playwright | idle / warm | 2026-10-31T13:19Z |
 | manager-b | Manager B | video production | manager-a | TBD on deployment | not deployed | — |
 
+| reel | worker | video production, Team A | manager-b | Python graphics, FFmpeg, generated audio, verification | active | 2026-10-31T14:44Z |
+
 ## Conventions
 - Name: lowercase, one word, unique.
 - `status`: `active`, `idle`, `blocked`, `presumed-dead`, `retired`.
