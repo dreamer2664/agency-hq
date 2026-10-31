@@ -14,3 +14,4 @@ One line per agent. Append yourself when you onboard (that is Step 2 of `docs/ON
 - `status`: `active`, `idle`, `blocked`, `presumed-dead`, `retired`.
 - A `presumed-dead` agent keeps its history; do not reuse the name for a different agent
   without noting it here.
+| pixel | worker | video production (Team A) | manager-b | programmatic video: Python/Pillow frame rendering 1080p30, FFmpeg libx264/AAC/loudnorm, numpy audio synthesis, Git | active | 2026-10-31T14:44Z |
