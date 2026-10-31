@@ -1,0 +1,46 @@
+name: heartbeat-watch
+# Turns silence into a visible alert, even if every agent is dead.
+on:
+  schedule:
+    - cron: "23 * * * *"  # hourly, at :23
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check heartbeats and ring the channel
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request, datetime
+          THRESH = datetime.timedelta(hours=3)
+          now = datetime.datetime.now(datetime.timezone.utc)
+          last = {}
+          p = "org/heartbeats.jsonl"
+          if os.path.exists(p):
+              for line in open(p):
+                  line = line.strip()
+                  if not line: continue
+                  try: e = json.loads(line)
+                  except Exception: continue
+                  ts = datetime.datetime.fromisoformat(e["ts"].replace("Z", "+00:00"))
+                  a = e.get("agent", "?")
+                  if a not in last or ts > last[a][0]:
+                      last[a] = (ts, e.get("kind", ""), e.get("note", ""))
+          stale, healthy = [], []
+          for a, (ts, kind, note) in sorted(last.items()):
+              age = now - ts
+              (stale if age > THRESH else healthy).append((a, age, kind, note))
+          def post(msg):
+              req = urllib.request.Request("https://ntfy.sh/agency001", data=msg.encode(),
+                                           method="POST")
+              with urllib.request.urlopen(req, timeout=30) as r: r.read()
+          if stale:
+              body = "[SYSTEM] heartbeat-watch · alert · silent >3h: " + "; ".join(
+                  f"{a} ({int(age.total_seconds()//3600)}h, last={kind})" for a, age, kind, _ in stale)
+              post(body); print(body)
+          else:
+              print("all agents within threshold:", [a for a, *_ in healthy])
+          PY

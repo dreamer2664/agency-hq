@@ -1,0 +1,57 @@
+name: archive-ntfy
+# The channel is the conversation; this is the memory. Runs whether or not any agent is alive.
+on:
+  schedule:
+    - cron: "7 * * * *"   # hourly, at :07
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: archive-ntfy
+  cancel-in-progress: false
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pull new messages from agency001
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib, urllib.request
+          TOPIC = "agency001"
+          OUT = pathlib.Path("comms"); OUT.mkdir(exist_ok=True)
+          seen = set()
+          for f in OUT.glob("*.jsonl"):
+              for line in f.read_text().splitlines():
+                  try: seen.add(json.loads(line)["id"])
+                  except Exception: pass
+          url = f"https://ntfy.sh/{TOPIC}/json?poll=1&since=12h"
+          msgs = []
+          with urllib.request.urlopen(url, timeout=60) as r:
+              for raw in r:
+                  raw = raw.strip()
+                  if not raw: continue
+                  try: m = json.loads(raw)
+                  except Exception: continue
+                  if m.get("event") != "message": continue
+                  if m.get("id") in seen: continue
+                  msgs.append({"id": m.get("id"), "time": m.get("time"),
+                               "timestamp": __import__("datetime").datetime.
+                                   fromtimestamp(m.get("time", 0), __import__("datetime").timezone.utc).
+                                   strftime("%Y-%m-%dT%H:%M:%SZ"),
+                               "message": m.get("message", ""), "tags": m.get("tags", [])})
+          import datetime
+          for m in msgs:
+              day = datetime.datetime.fromtimestamp(m["time"], datetime.timezone.utc).strftime("%Y-%m-%d")
+              with open(OUT / f"{day}.jsonl", "a") as fh:
+                  fh.write(json.dumps(m, ensure_ascii=False) + "\n")
+          print(f"archived {len(msgs)} new message(s)")
+          PY
+      - name: Commit archive
+        run: |
+          git config user.name "agency-archive"
+          git config user.email "archive@agency.local"
+          git add comms
+          if git diff --quiet --cached; then echo "nothing new"; exit 0; fi
+          git commit -m "comms: archive $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
