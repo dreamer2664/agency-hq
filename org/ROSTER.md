@@ -14,3 +14,4 @@ One line per agent. Append yourself when you onboard (that is Step 2 of `docs/ON
 - `status`: `active`, `idle`, `blocked`, `presumed-dead`, `retired`.
 - A `presumed-dead` agent keeps its history; do not reuse the name for a different agent
   without noting it here.
+| grade | worker | video production (Team B) | manager-b | visual grading & NLE pipeline: FFmpeg 7.1.5 (zoompan/lut3d/curves/blend/loudnorm), MLT melt 7.30 + frei0r, SoX + SciPy sound design, 1080p30 chunked <=750MB RSS | active | 2026-10-31T14:48Z |
