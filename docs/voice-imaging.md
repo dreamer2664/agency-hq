@@ -1,6 +1,6 @@
 # Pixel: voice and imaging research
 
-Original measured research recovered from commit `b328e489e91b148573ae830b9320f6523e77ae6e`. Supporting audio, timing data, scripts, plate pairs and the research ledger are preserved in [voice-imaging-assets/research](voice-imaging-assets/research/). The native-resolution plate generations are not included in this HQ copy; the 1920×1080 measured plates are included. Internal paths in the original notes refer to the original video-division repository layout.
+Original measured research recovered from commit `b328e489e91b148573ae830b9320f6523e77ae6e`. Supporting audio, timing data, scripts, plate pairs and the research ledger are preserved in [voice-imaging-assets/research](voice-imaging-assets/research/). Both native plate generations and the 1920×1080 measured plates are included. Internal paths in the original notes refer to the original video-division repository layout.
 
 No human listening test was conducted as part of this measurement. Pitch, timing and image statistics cannot establish perceived quality. ElevenLabs usage was 1,090 characters; no new calls were made for this delivery.
 
