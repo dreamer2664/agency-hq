@@ -1,0 +1,92 @@
+{
+  "before": {
+    "file": "ab-pixel/v07_stems/before_v07_narration.wav",
+    "duration_s": 60.0,
+    "voiced_frames": 2173,
+    "f0_hz": {
+      "median": 109.25,
+      "mean": 108.22
+    },
+    "f0_sd_semitones": 3.939,
+    "f0_range_p5_p95_st": 12.688,
+    "lines": 20,
+    "inter_line_gaps": {
+      "n": 19,
+      "min": 0.06,
+      "p25": 0.06,
+      "median": 0.685,
+      "mean": 1.141,
+      "p75": 1.175,
+      "max": 9.2,
+      "sd": 2.06
+    },
+    "rate_wps": {
+      "n": 20,
+      "min": 1.473,
+      "p25": 2.461,
+      "median": 3.08,
+      "mean": 2.878,
+      "p75": 3.248,
+      "max": 4.255,
+      "sd": 0.728
+    },
+    "rate_cv": 0.253,
+    "pitch_reset_st": {
+      "n": 17,
+      "min": 0.079,
+      "p25": 6.87,
+      "median": 7.977,
+      "mean": 7.242,
+      "p75": 8.572,
+      "max": 10.443,
+      "sd": 2.786
+    },
+    "pre_twist_gap_s": 0.975,
+    "longest_gap_s": 9.2
+  },
+  "after": {
+    "file": "ab-pixel/v07_stems/after_v07_narration.wav",
+    "duration_s": 60.0,
+    "voiced_frames": 2251,
+    "f0_hz": {
+      "median": 107.45,
+      "mean": 107.66
+    },
+    "f0_sd_semitones": 3.779,
+    "f0_range_p5_p95_st": 12.558,
+    "lines": 25,
+    "inter_line_gaps": {
+      "n": 24,
+      "min": 0.181,
+      "p25": 0.269,
+      "median": 0.445,
+      "mean": 0.758,
+      "p75": 0.916,
+      "max": 3.63,
+      "sd": 0.822
+    },
+    "rate_wps": {
+      "n": 25,
+      "min": 1.434,
+      "p25": 1.923,
+      "median": 2.524,
+      "mean": 2.542,
+      "p75": 2.985,
+      "max": 4.035,
+      "sd": 0.744
+    },
+    "rate_cv": 0.293,
+    "pitch_reset_st": {
+      "n": 22,
+      "min": 0.217,
+      "p25": 2.76,
+      "median": 5.921,
+      "mean": 5.515,
+      "p75": 8.532,
+      "max": 9.883,
+      "sd": 3.14
+    },
+    "pre_twist_gap_s": 3.63,
+    "longest_gap_s": 3.63
+  }
+}
